@@ -1,0 +1,20 @@
+env:
+  GH_TOKEN: ENCRYPTED[c151b547b12e829cde9300e2ecc30906ddda97b5a4d96ae9b467e49e81f86fd22d3ce6addf9810d7967129edf650d452]
+  GH_USER: ENCRYPTED[9db36b1d544b046a0b6661a3e3766bd95815ca1a015f3759fe465a971f96530dc237e7f6b8c66793e477ffdcac429728]
+  GH_EMAIL: ENCRYPTED[c0cccecbb367a8aa36b4f9a0d8e4716cdb42f9d1ba63e7e0ad405b36445503b14c2b54162aecdd61c52312d628ec2294]
+  GH_RUN_ID: ""
+  GH_BUILD_REPO: "EternalX-project/EternalX-clang-build"
+  GH_REL_REPO: "EternalX-project/EternalX-Clang"
+
+task:
+  name: LLVM CLANG BUILD
+  timeout_in: 120m  
+
+  container:
+    image: ubuntu:latest
+    cpu: 8
+    memory: 32G
+  
+  build_script:
+    - ./ci_build.sh
+      

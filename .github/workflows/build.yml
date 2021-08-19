@@ -1,18 +1,23 @@
-name: Build test
+name: LLVM CLANG BUILD
+
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+
 jobs:
-  build-test:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: bash ci.sh deps
-    - name: Build LLVM
-      run: bash ci.sh llvm
-    - name: Build binutils
-      run: bash ci.sh binutils
-    - name: Build kernel
-      run: bash ci.sh kernel
+      - name: Checkout Scripts
+        uses: actions/checkout@v2      
+
+      - name: Deploy Builder
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_USER: ${{ secrets.GH_USER }}
+          GH_EMAIL: ${{ secrets.GH_EMAIL }}
+          GH_RUN_ID: ${{ secrets.GH_RUN_ID }}
+          GH_BUILD_REPO: ${{ secrets.GH_BUILD_REPO }}
+          GH_REL_REPO: ${{ secrets.GH_REL_REPO }}
+        run: ./ci_build.sh
+      
